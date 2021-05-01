@@ -17,7 +17,11 @@ class Library:
         self.name_of_library = name_of_library
 
     def displayBooks(self):
-        pass
+        print("Available books are as Follows\n")
+        i = 0
+        for item in self.listofbooks:
+            print(f"{i+1} {item}")
+            i +=1    
 
     def lendBooks(self,name_of_book_wanted,nameofperson,lended_books):
         self.lended_books = lended_books
@@ -26,14 +30,15 @@ class Library:
         
         for key,value in lended_books.items():
             if name_of_book_wanted == key:
-                print("book found")
-                break
+               print(f"The Book is Not Available it is Lended to {value}")
+            
         
         i = 0
         for item in self.listofbooks:
             if name_of_book_wanted == item:
                 self.lended_books.update({self.name_of_book_wanted:self.nameofperson})
                 del self.listofbooks[i]
+                print(f"The Book is now lended to {nameofperson}")
             i +=1 
         
         
@@ -43,16 +48,20 @@ class Library:
         #     else:
         #         print(Error)
         # except Exception as e:
-        #     print("Book not Found")
+        #     print("Book not Found") 
+
 
     def addBook(self,name_of_book):
         self.name_of_book = name_of_book
         self.listofbooks.append(name_of_book)
-
+        
         
     
-    def returnBook(self):
-        pass
+    def returnBook(self,name_of_book_returned):
+        self.name_of_book_returned = name_of_book_returned
+        self.listofbooks.append(name_of_book_returned)
+        del lended_books[name_of_book_returned]
+        
 
 
 
@@ -63,7 +72,13 @@ if __name__ == '__main__':
     # mayankLib.addBook(book_add)
     # print(mayankLib.listofbooks)
     lended_books = {"modern history":"mayank verma","majid hussain":"jitendra nirnejak"}
-    print(mayankLib.lendBooks("spectrum","kitola",lended_books))
-    print(mayankLib.listofbooks)
+    mayankLib.lendBooks("spectrum","kitola",lended_books)
     print(mayankLib.lended_books)
-
+    mayankLib.displayBooks()
+    mayankLib.returnBook("spectrum")
+    print(mayankLib.lended_books)
+    mayankLib.displayBooks()
+    # print(mayankLib.listofbooks)
+    # print(mayankLib.lended_books)
+    # print(mayankLib.lendBooks())
+    # mayankLib.displayBooks()
